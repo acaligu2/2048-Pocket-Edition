@@ -13,20 +13,24 @@
 @end
 
 @implementation ViewController
-@synthesize gameTitle, button;
+@synthesize gameTitle, gameTiles, swipeTest;
+
+NSMutableArray *gameTiles;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    UIColor *backgroundColor = [[UIColor alloc]initWithRed:121.0/255.0 green: 138.0/255.0 blue: 132.0/255.0 alpha: 1.0];
-    UIColor *textColor = [[UIColor alloc]initWithRed:57.0/255.0 green: 57.0/255.0 blue: 57.0/255.0 alpha: 1.0];
+    UIColor *backgroundColor = [[UIColor alloc]initWithRed: 176.0/255.0 green: 210.0/255.0 blue: 202.0/255.0 alpha: 1.0];
+    UIColor *textColor = [[UIColor alloc]initWithRed:119.0/255.0 green: 138.0/255.0 blue: 152.0/255.0 alpha: 1.0];
+    UIColor *tileColor = [[UIColor alloc]initWithRed:221.0/255.0 green: 221.0/255.0 blue: 221.0/255.0 alpha: 1.0];
 
     
     self.view.backgroundColor = backgroundColor;
-    [gameTitle setTextColor:textColor];
-    [gameTitle setFont: [UIFont boldSystemFontOfSize:32]];
+    [gameTitle setTextColor: textColor];
     
+    for (UILabel *tile in gameTiles) {
+        [tile setBackgroundColor:tileColor];
+    }
         
 }
 
@@ -36,6 +40,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

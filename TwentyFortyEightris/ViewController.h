@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+
+@property (retain, nonatomic) IBOutletCollection(UILabel) NSArray *gameTiles;
+
 @property (nonatomic, strong) IBOutlet UILabel *gameTitle;
-@property (nonatomic, strong) IBOutlet UIButton *button;
+@property (nonatomic, strong) IBOutlet UILabel *swipeTest;
 
 
 @end
