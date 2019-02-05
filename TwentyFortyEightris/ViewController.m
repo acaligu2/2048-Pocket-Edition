@@ -13,22 +13,33 @@
 @end
 
 @implementation ViewController
-@synthesize gameTitle, gameTiles, swipeTest;
+@synthesize gameTitle, gameTiles, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground;
+
+int gameScore = 0;
 
 NSMutableArray *gameTiles;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [scoreLabel setText:[NSString stringWithFormat:@"%d", gameScore]];
+    
     //Establish Colors for game
     
     UIColor *backgroundColor = [[UIColor alloc]initWithRed: 176.0/255.0 green: 210.0/255.0 blue: 202.0/255.0 alpha: 1.0];
     UIColor *textColor = [[UIColor alloc]initWithRed:119.0/255.0 green: 138.0/255.0 blue: 152.0/255.0 alpha: 1.0];
     UIColor *tileColor = [[UIColor alloc]initWithRed:221.0/255.0 green: 221.0/255.0 blue: 221.0/255.0 alpha: 1.0];
+    UIColor *accentColor = [[UIColor alloc]initWithRed:201.0/255.0 green: 238.0/255.0 blue: 229.0/255.0 alpha: 1.0];
 
     
-    self.view.backgroundColor = backgroundColor;
+    [tileBackground setBackgroundColor:backgroundColor];
+    
+    self.view.backgroundColor = accentColor;
     [gameTitle setTextColor: textColor];
+    [scoreLabel setTextColor: textColor];
+    [scoreIndicator setTextColor: textColor];
+    
+    [scoreBackground setBackgroundColor:backgroundColor];
     
     //Choose first two tiles that will contain vaules
     
@@ -49,9 +60,29 @@ NSMutableArray *gameTiles;
     
     [gameTiles[firstTile] setText: @"2"];
     [gameTiles[secondTile] setText: @"2"];
+    
+    TileInformation* testTile = [[TileInformation alloc] init];
+
+    [testTile setTileScore:10];
+    
+    int val;
+    val = [testTile getScore];
+    
+    [scoreLabel setText:[NSString stringWithFormat:@"%d", val]];
+    
         
 }
 
+//[self setScore:10];
+
+//Adds to the score when two tiles are combined
+- (void)setScore:(int)scoreAddition{
+    
+    gameScore += scoreAddition;
+    
+    [scoreLabel setText:[NSString stringWithFormat:@"%d", gameScore]];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

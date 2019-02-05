@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TileInformation.h"
 
 @interface ViewController : UIViewController
 
@@ -14,6 +15,12 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *gameTitle;
 @property (nonatomic, strong) IBOutlet UILabel *swipeTest;
+@property (nonatomic, strong) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, strong) IBOutlet UILabel *scoreIndicator;
+@property (nonatomic, strong) IBOutlet UIView *tileBackground;
+@property (nonatomic, strong) IBOutlet UIView *scoreBackground;
+
+-(void)setScore:(int)scoreAddition;
 
 
 @end
