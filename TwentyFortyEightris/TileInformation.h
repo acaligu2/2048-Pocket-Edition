@@ -10,9 +10,6 @@
 
 @interface TileInformation : NSObject{
     
-    int xCoord;                         //Gives x-location in tile matrix
-    int yCoord;                         //Gives y-location in tile matrix
-    
     TileInformation* left;              //Left neighbor
     TileInformation* right;             //Right neighbor
     TileInformation* above;             //Upper neighbor
@@ -20,9 +17,17 @@
     
     int tileScore;                      //Value of tile
     
+    int neighborNum;
+    
 }
 
 -(void)setTileScore: (int)scoreAddition;
+-(void)setNeighbor: (TileInformation*)neighborObj inDirection:(NSString*)direction;
 -(int)getScore;
+-(int)getNeighbors;
+-(TileInformation*)getAbove;
+-(TileInformation*)getBelow;
+-(TileInformation*)getLeft;
+-(TileInformation*)getRight;
 
 @end

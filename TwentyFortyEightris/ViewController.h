@@ -11,7 +11,10 @@
 
 @interface ViewController : UIViewController
 
-@property (retain, nonatomic) IBOutletCollection(UILabel) NSArray *gameTiles;
+@property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *topTiles;
+@property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *upperMiddleTiles;
+@property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *lowerMiddleTiles;
+@property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *bottomTiles;
 
 @property (nonatomic, strong) IBOutlet UILabel *gameTitle;
 @property (nonatomic, strong) IBOutlet UILabel *swipeTest;
@@ -21,7 +24,7 @@
 @property (nonatomic, strong) IBOutlet UIView *scoreBackground;
 
 -(void)setScore:(int)scoreAddition;
-
+-(void)establishNeighbors:(NSMutableArray*)infoMat;
 
 @end
 

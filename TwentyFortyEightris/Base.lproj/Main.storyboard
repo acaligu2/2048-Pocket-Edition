@@ -209,22 +209,22 @@
                         <outlet property="scoreLabel" destination="01o-PM-931" id="pBq-qC-dIG"/>
                         <outlet property="swipeTest" destination="Uoh-GO-AGQ" id="t6O-YK-eZv"/>
                         <outlet property="tileBackground" destination="zSO-Za-UUF" id="XqT-oc-RKH"/>
-                        <outletCollection property="gameTiles" destination="w7v-ye-VbZ" id="11q-JJ-Z7G"/>
-                        <outletCollection property="gameTiles" destination="kP1-VU-VP3" id="Mlr-Xk-1pQ"/>
-                        <outletCollection property="gameTiles" destination="pgt-Hf-GUJ" id="QLu-Dl-Evp"/>
-                        <outletCollection property="gameTiles" destination="5Zl-Ii-c0G" id="hhv-ri-zxP"/>
-                        <outletCollection property="gameTiles" destination="kUA-2I-f7N" id="BmG-ZX-LDU"/>
-                        <outletCollection property="gameTiles" destination="u23-xs-hrt" id="30d-oq-INs"/>
-                        <outletCollection property="gameTiles" destination="MeI-eZ-MEa" id="p94-1x-FMj"/>
-                        <outletCollection property="gameTiles" destination="FUM-AB-Aed" id="EnR-sH-nCv"/>
-                        <outletCollection property="gameTiles" destination="CNI-EY-DBb" id="c9b-ct-oTi"/>
-                        <outletCollection property="gameTiles" destination="hAJ-oC-dG8" id="g5v-0F-N8E"/>
-                        <outletCollection property="gameTiles" destination="sJa-LY-Vda" id="3hL-i0-Z86"/>
-                        <outletCollection property="gameTiles" destination="TVt-Ya-7Rg" id="nNq-Eg-f0u"/>
-                        <outletCollection property="gameTiles" destination="5tp-fB-lko" id="ejc-St-7u1"/>
-                        <outletCollection property="gameTiles" destination="oii-4P-RPh" id="APD-Za-Yjj"/>
-                        <outletCollection property="gameTiles" destination="dM9-5k-IVT" id="dMv-mf-CK6"/>
-                        <outletCollection property="gameTiles" destination="mWP-WM-Zwo" id="QbP-ri-7DU"/>
+                        <outletCollection property="upperMiddleTiles" destination="kUA-2I-f7N" collectionClass="NSMutableArray" id="WBN-hD-ZH5"/>
+                        <outletCollection property="upperMiddleTiles" destination="u23-xs-hrt" collectionClass="NSMutableArray" id="WjX-y4-flP"/>
+                        <outletCollection property="upperMiddleTiles" destination="MeI-eZ-MEa" collectionClass="NSMutableArray" id="xaQ-gO-6Fh"/>
+                        <outletCollection property="upperMiddleTiles" destination="FUM-AB-Aed" collectionClass="NSMutableArray" id="WXL-Dp-wTB"/>
+                        <outletCollection property="lowerMiddleTiles" destination="mWP-WM-Zwo" collectionClass="NSMutableArray" id="J86-7Z-lD6"/>
+                        <outletCollection property="lowerMiddleTiles" destination="CNI-EY-DBb" collectionClass="NSMutableArray" id="5Hk-Df-P89"/>
+                        <outletCollection property="lowerMiddleTiles" destination="hAJ-oC-dG8" collectionClass="NSMutableArray" id="yNL-z5-lJz"/>
+                        <outletCollection property="lowerMiddleTiles" destination="sJa-LY-Vda" collectionClass="NSMutableArray" id="feU-tk-4vl"/>
+                        <outletCollection property="bottomTiles" destination="TVt-Ya-7Rg" collectionClass="NSMutableArray" id="O2g-0j-B9j"/>
+                        <outletCollection property="bottomTiles" destination="5tp-fB-lko" collectionClass="NSMutableArray" id="2So-u0-LjT"/>
+                        <outletCollection property="bottomTiles" destination="oii-4P-RPh" collectionClass="NSMutableArray" id="WLr-On-nqz"/>
+                        <outletCollection property="bottomTiles" destination="dM9-5k-IVT" collectionClass="NSMutableArray" id="GA4-jb-MNN"/>
+                        <outletCollection property="topTiles" destination="w7v-ye-VbZ" collectionClass="NSMutableArray" id="t33-JC-W3a"/>
+                        <outletCollection property="topTiles" destination="kP1-VU-VP3" collectionClass="NSMutableArray" id="j6A-Qd-RGj"/>
+                        <outletCollection property="topTiles" destination="pgt-Hf-GUJ" collectionClass="NSMutableArray" id="Pv4-KU-pQR"/>
+                        <outletCollection property="topTiles" destination="5Zl-Ii-c0G" collectionClass="NSMutableArray" id="0P3-8l-zbH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

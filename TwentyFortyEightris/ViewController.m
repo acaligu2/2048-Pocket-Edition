@@ -13,14 +13,45 @@
 @end
 
 @implementation ViewController
-@synthesize gameTitle, gameTiles, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground;
+@synthesize gameTitle, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, upperMiddleTiles, topTiles, lowerMiddleTiles, bottomTiles;
 
 int gameScore = 0;
 
-NSMutableArray *gameTiles;
+NSMutableArray* tileMatrix;
+NSMutableArray* infoMatrix;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    tileMatrix = [[NSMutableArray alloc]initWithCapacity:4];
+    
+    [tileMatrix addObject:topTiles];
+    [tileMatrix addObject:upperMiddleTiles];
+    [tileMatrix addObject:lowerMiddleTiles];
+    [tileMatrix addObject:bottomTiles];
+    
+    infoMatrix = [[NSMutableArray alloc] initWithCapacity:4];
+    
+    int i;
+    int j;
+    for(i = 0; i < 4; i++){
+        
+        NSMutableArray *row = [[NSMutableArray alloc] initWithCapacity:4];
+        
+        for(j = 0; j < 4; j++){
+            
+            TileInformation *newTile = [[TileInformation alloc] init];
+            [row addObject:newTile];
+            
+        }
+        
+        [infoMatrix addObject:row];
+        
+    }
+    
+    [self establishNeighbors:infoMatrix];
+    
     
     [scoreLabel setText:[NSString stringWithFormat:@"%d", gameScore]];
     
@@ -42,38 +73,87 @@ NSMutableArray *gameTiles;
     [scoreBackground setBackgroundColor:backgroundColor];
     
     //Choose first two tiles that will contain vaules
+
+    //Random coords for first tile
+    NSInteger tileOneX = arc4random() % 4;
+    NSInteger tileOneY = arc4random() % 4;
     
-    NSInteger firstTile = arc4random() % 16;
-    NSInteger secondTile = arc4random() % 16;
+    //Random coords for second tile
+    NSInteger tileTwoX = arc4random() % 4;
+    NSInteger tileTwoY = arc4random() % 4;
     
-    //Ensure the same tile isn't picked
-    if(secondTile == firstTile){
+    //Ensure the same tile wasn't selected for both
+    while(tileOneX == tileTwoX && tileOneY == tileTwoY){
         
-        secondTile = arc4random() % 16;
+        tileTwoX = arc4random() % 4;
+        tileTwoY = arc4random() % 4;
         
     }
     
     //Loop through array of labels and set all to color
-    for (UILabel *tile in gameTiles) {
-        [tile setBackgroundColor:tileColor];
+    for(NSMutableArray *row in tileMatrix){
+        
+        for(UILabel *tile in row){
+            
+            [tile setBackgroundColor:tileColor];
+            
+        }
+        
     }
     
-    [gameTiles[firstTile] setText: @"2"];
-    [gameTiles[secondTile] setText: @"2"];
+    //Set value of first two tiles
+    [tileMatrix[tileOneX][tileOneY] setText:[NSString stringWithFormat:@"%d", 2]];
+    [tileMatrix[tileTwoX][tileTwoY] setText:[NSString stringWithFormat:@"%d", 2]];
     
-    TileInformation* testTile = [[TileInformation alloc] init];
-
-    [testTile setTileScore:10];
+    //Also reflect value in TileInformation class
+    [infoMatrix[tileOneX][tileOneY] setTileScore:2];
+    [infoMatrix[tileTwoX][tileTwoY] setTileScore:2];
     
-    int val;
-    val = [testTile getScore];
     
-    [scoreLabel setText:[NSString stringWithFormat:@"%d", val]];
-    
-        
 }
 
 //[self setScore:10];
+
+//Creates neighbor relations for all tiles
+-(void)establishNeighbors:(NSMutableArray*)infoMat{
+    
+    for(int i = 0; i < 4; i++){
+        
+        for(int j = 0; j < 4; j++){
+            
+            //Top
+            if(j - 1 >= 0){
+                
+                [infoMat[i][j] setNeighbor:infoMat[i][j-1] inDirection:@"above"];
+                
+            }
+            
+            //Bottom
+            if(j + 1 < 4){
+                
+                [infoMat[i][j] setNeighbor:infoMat[i][j+1] inDirection:@"below"];
+                
+            }
+            
+            //Left
+            if(i - 1 >= 0){
+                
+                [infoMat[i][j] setNeighbor:infoMat[i-1][j] inDirection:@"left"];
+                
+            }
+            
+            //Right
+            if(i + 1 < 4){
+                
+                [infoMat[i][j] setNeighbor:infoMat[i+1][j] inDirection:@"right"];
+                
+            }
+            
+        }
+        
+    }
+    
+}
 
 //Adds to the score when two tiles are combined
 - (void)setScore:(int)scoreAddition{
@@ -123,6 +203,8 @@ NSMutableArray *gameTiles;
             
             
     }
+    
+    
     
 }
 
