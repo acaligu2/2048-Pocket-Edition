@@ -121,6 +121,8 @@ NSNumber *occupiedSpot;
         
     }
     
+    [scoreLabel setText:[NSString stringWithFormat:@"%d", 0]];
+    
     [self spawnNewTile];
     [self spawnNewTile];
     
@@ -212,39 +214,88 @@ NSNumber *occupiedSpot;
     if([dir isEqualToString:@"up"]){
         
         if([target getAbove] != nil){
-        
-            int val = [target getScore];
-            [target setTileScore:0];
-            [tileMatrix[x][y] setText:@""];
-            [[target getAbove] setTileScore:val];
-            [tileMatrix[x-1][y] setText:[NSString stringWithFormat:@"%d", val]];
             
-            occupied[4 * x + y] = freeSpot;
-            occupied[4 * (x-1) + y] = occupiedSpot;
+            if(occupied[4*(x-1)+y] == freeSpot){
         
-            [self moveTile:[target getAbove] x:x-1 y:y direction:@"up"];
+                int val = [target getScore];
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [[target getAbove] setTileScore:val];
+                [tileMatrix[x-1][y] setText:[NSString stringWithFormat:@"%d", val]];
+            
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * (x-1) + y] = occupiedSpot;
+        
+                [self moveTile:[target getAbove] x:x-1 y:y direction:@"up"];
+                
+            }else{
+                
+                if([target getScore] == [[target getAbove] getScore]){
+                    
+                    int val = [target getScore];
+                    [target setTileScore:0];
+                    [tileMatrix[x][y] setText:@""];
+                    [[target getAbove] setTileScore:(val*2)];
+                    [tileMatrix[x-1][y] setText:[NSString stringWithFormat:@"%d", (val*2)]];
+                    
+                    occupied[4 * x + y] = freeSpot;
+                    occupied[4 * (x-1) + y] = occupiedSpot;
+                    
+                    [self moveTile:[target getAbove] x:x-1 y:y direction:@"up"];
+                    
+                    
+                    [self setScore:(val*2)];
+                    
+                }
+                
+            }
         
         }else{
-        
+            
             return;
-        
+            
         }
+        
         
     }
     if([dir isEqualToString:@"down"]){
         
         if([target getBelow] != nil){
             
-            int val = [target getScore];
-            [target setTileScore:0];
-            [tileMatrix[x][y] setText:@""];
-            [[target getBelow] setTileScore:val];
-            [tileMatrix[x+1][y] setText:[NSString stringWithFormat:@"%d", val]];
-            
-            occupied[4 * x + y] = freeSpot;
-            occupied[4 * (x+1) + y] = occupiedSpot;
-            
-            [self moveTile:[target getBelow] x:x+1 y:y direction:@"down"];
+            if(occupied[4*(x+1)+y] == freeSpot){
+                
+                int val = [target getScore];
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [[target getBelow] setTileScore:val];
+                [tileMatrix[x+1][y] setText:[NSString stringWithFormat:@"%d", val]];
+                
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * (x+1) + y] = occupiedSpot;
+                
+                [self moveTile:[target getBelow] x:x+1 y:y direction:@"down"];
+                
+            }else{
+                
+                if([target getScore] == [[target getBelow] getScore]){
+                    
+                    int val = [target getScore];
+                    [target setTileScore:0];
+                    [tileMatrix[x][y] setText:@""];
+                    [[target getBelow] setTileScore:(val*2)];
+                    [tileMatrix[x+1][y] setText:[NSString stringWithFormat:@"%d", (val*2)]];
+                    
+                    occupied[4 * x + y] = freeSpot;
+                    occupied[4 * (x+1) + y] = occupiedSpot;
+                    
+                    [self moveTile:[target getBelow] x:x+1 y:y direction:@"down"];
+                    
+                    
+                    [self setScore:(val*2)];
+                    
+                }
+                
+            }
             
         }else{
             
@@ -257,16 +308,39 @@ NSNumber *occupiedSpot;
         
         if([target getLeft] != nil){
             
-            int val = [target getScore];
-            [target setTileScore:0];
-            [tileMatrix[x][y] setText:@""];
-            [[target getLeft] setTileScore:val];
-            [tileMatrix[x][y-1] setText:[NSString stringWithFormat:@"%d", val]];
-            
-            occupied[4 * x + y] = freeSpot;
-            occupied[4 * x + (y-1)] = occupiedSpot;
-            
             [self moveTile:[target getLeft] x:x y:y-1 direction:@"left"];
+            
+            if(occupied[4*x+(y-1)] == freeSpot){
+                
+                int val = [target getScore];
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [[target getLeft] setTileScore:val];
+                [tileMatrix[x][y-1] setText:[NSString stringWithFormat:@"%d", val]];
+                
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * x + (y-1)] = occupiedSpot;
+                
+            }else{
+                
+                if([target getScore] == [[target getLeft] getScore]){
+                    
+                    int val = [target getScore];
+                    [target setTileScore:0];
+                    [tileMatrix[x][y] setText:@""];
+                    [[target getAbove] setTileScore:(val*2)];
+                    [tileMatrix[x][y-1] setText:[NSString stringWithFormat:@"%d", (val*2)]];
+                    
+                    occupied[4 * x + y] = freeSpot;
+                    occupied[4 * x + (y-1)] = occupiedSpot;
+
+                    
+                    
+                    [self setScore:(val*2)];
+                    
+                }
+                
+            }
             
         }else{
             
@@ -279,16 +353,40 @@ NSNumber *occupiedSpot;
         
         if([target getRight] != nil){
             
-            int val = [target getScore];
-            [target setTileScore:0];
-            [tileMatrix[x][y] setText:@""];
-            [[target getRight] setTileScore:val];
-            [tileMatrix[x][y+1] setText:[NSString stringWithFormat:@"%d", val]];
-            
-            occupied[4 * x + y] = freeSpot;
-            occupied[4 * x + (y+1)] = occupiedSpot;
-            
-            [self moveTile:[target getRight] x:x y:y+1 direction:@"right"];
+            if(occupied[4*x+(y+1)] == freeSpot){
+                
+                int val = [target getScore];
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [[target getRight] setTileScore:val];
+                [tileMatrix[x][y+1] setText:[NSString stringWithFormat:@"%d", val]];
+                
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * x + (y+1)] = occupiedSpot;
+                
+                [self moveTile:[target getRight] x:x y:y+1 direction:@"right"];
+                
+            }else{
+                
+                if([target getScore] == [[target getRight] getScore]){
+                    
+                    int val = [target getScore];
+                    [target setTileScore:0];
+                    [tileMatrix[x][y] setText:@""];
+                    [[target getRight] setTileScore:(val*2)];
+                    [tileMatrix[x][y+1] setText:[NSString stringWithFormat:@"%d", (val*2)]];
+                    
+                    occupied[4 * x + y] = freeSpot;
+                    occupied[4 * x + (y+1)] = occupiedSpot;
+                    
+                    [self moveTile:[target getRight] x:x y:y+1 direction:@"right"];
+                    
+                    
+                    [self setScore:(val*2)];
+                    
+                }
+                
+            }
             
         }else{
             
