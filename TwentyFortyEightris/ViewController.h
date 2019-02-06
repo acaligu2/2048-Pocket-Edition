@@ -16,6 +16,7 @@
 @property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *lowerMiddleTiles;
 @property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *bottomTiles;
 
+@property (nonatomic, strong) IBOutlet UIButton *reset;
 @property (nonatomic, strong) IBOutlet UILabel *gameTitle;
 @property (nonatomic, strong) IBOutlet UILabel *swipeTest;
 @property (nonatomic, strong) IBOutlet UILabel *scoreLabel;
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UIView *scoreBackground;
 
 -(void)setScore:(int)scoreAddition;
+-(void)spawnNewTile;
 -(void)establishNeighbors:(NSMutableArray*)infoMat;
 
 @end

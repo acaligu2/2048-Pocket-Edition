@@ -13,18 +13,31 @@
 @end
 
 @implementation ViewController
-@synthesize gameTitle, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, upperMiddleTiles, topTiles, lowerMiddleTiles, bottomTiles;
+@synthesize gameTitle, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, upperMiddleTiles, topTiles, lowerMiddleTiles, bottomTiles, reset;
 
 int gameScore = 0;
 
 NSMutableArray* tileMatrix;
 NSMutableArray* infoMatrix;
+NSMutableArray* occupied;
+NSNumber *freeSpot;
+NSNumber *occupiedSpot;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
     tileMatrix = [[NSMutableArray alloc]initWithCapacity:4];
+    occupied = [[NSMutableArray alloc]initWithCapacity:16];
+    
+    freeSpot = [NSNumber numberWithInteger:0];
+    occupiedSpot = [NSNumber numberWithInteger:1];
+
+    for(int i = 0; i < 16; i++){
+        
+        occupied[i] = freeSpot;
+        
+    }
     
     [tileMatrix addObject:topTiles];
     [tileMatrix addObject:upperMiddleTiles];
@@ -65,6 +78,8 @@ NSMutableArray* infoMatrix;
     
     [tileBackground setBackgroundColor:backgroundColor];
     
+    [reset setBackgroundColor:backgroundColor];
+    
     self.view.backgroundColor = accentColor;
     [gameTitle setTextColor: textColor];
     [scoreLabel setTextColor: textColor];
@@ -74,21 +89,8 @@ NSMutableArray* infoMatrix;
     
     //Choose first two tiles that will contain vaules
 
-    //Random coords for first tile
-    NSInteger tileOneX = arc4random() % 4;
-    NSInteger tileOneY = arc4random() % 4;
-    
-    //Random coords for second tile
-    NSInteger tileTwoX = arc4random() % 4;
-    NSInteger tileTwoY = arc4random() % 4;
-    
-    //Ensure the same tile wasn't selected for both
-    while(tileOneX == tileTwoX && tileOneY == tileTwoY){
-        
-        tileTwoX = arc4random() % 4;
-        tileTwoY = arc4random() % 4;
-        
-    }
+    [self spawnNewTile];
+    [self spawnNewTile];
     
     //Loop through array of labels and set all to color
     for(NSMutableArray *row in tileMatrix){
@@ -101,14 +103,26 @@ NSMutableArray* infoMatrix;
         
     }
     
-    //Set value of first two tiles
-    [tileMatrix[tileOneX][tileOneY] setText:[NSString stringWithFormat:@"%d", 2]];
-    [tileMatrix[tileTwoX][tileTwoY] setText:[NSString stringWithFormat:@"%d", 2]];
     
-    //Also reflect value in TileInformation class
-    [infoMatrix[tileOneX][tileOneY] setTileScore:2];
-    [infoMatrix[tileTwoX][tileTwoY] setTileScore:2];
+}
+- (IBAction)resetGame:(id)sender {
     
+    for(int i = 0; i < 4; i++){
+        
+        for(int j = 0; j < 4; j++){
+            
+            
+            [infoMatrix[i][j] setTileScore:0];
+            [tileMatrix[i][j] setText:@""];
+            occupied[4 * i + j] = freeSpot;
+            
+        }
+        
+        
+    }
+    
+    [self spawnNewTile];
+    [self spawnNewTile];
     
 }
 
@@ -161,6 +175,29 @@ NSMutableArray* infoMatrix;
     gameScore += scoreAddition;
     
     [scoreLabel setText:[NSString stringWithFormat:@"%d", gameScore]];
+    
+}
+
+-(void)spawnNewTile{
+    
+    //Random coords for first tile
+    NSInteger tileOneX = arc4random() % 4;
+    NSInteger tileOneY = arc4random() % 4;
+    
+    while(occupied[4 * tileOneX + tileOneY] == occupiedSpot){
+        
+        tileOneX = arc4random() % 4;
+        tileOneY = arc4random() % 4;
+        
+    }
+    
+    occupied[4 * tileOneX + tileOneY] = occupiedSpot;
+    
+    //Set value of first two tiles
+    [tileMatrix[tileOneX][tileOneY] setText:[NSString stringWithFormat:@"%d", 2]];
+    
+    //Also reflect value in TileInformation class
+    [infoMatrix[tileOneX][tileOneY] setTileScore:2];
     
 }
 
