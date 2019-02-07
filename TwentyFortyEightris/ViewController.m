@@ -211,18 +211,40 @@ NSNumber *occupiedSpot;
 
 -(void)moveTile:(TileInformation *)target x:(int)x y:(int)y direction:(NSString*)dir{
     
+    //Done?
     if([dir isEqualToString:@"up"]){
         
         if([target getAbove] != nil){
             
-            int val = [target getScore];
-            [target setTileScore:0];
-            [tileMatrix[x][y] setText:@""];
-            [[target getAbove] setTileScore:val];
-            [tileMatrix[x-1][y] setText:[NSString stringWithFormat:@"%d", val]];
+            int val;
             
-            occupied[4 * x + y] = freeSpot;
-            occupied[4 * (x-1) + y] = occupiedSpot;
+            if([[target getAbove] getScore] == [target getScore]){
+            
+                val = [target getScore] * 2;
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [[target getAbove] setTileScore:val];
+                [tileMatrix[x-1][y] setText:[NSString stringWithFormat:@"%d", val]];
+                
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * (x-1) + y] = occupiedSpot;
+                
+            }else if ([[target getAbove] getScore] == 0){
+                
+                val = [target getScore];
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [[target getAbove] setTileScore:val];
+                [tileMatrix[x-1][y] setText:[NSString stringWithFormat:@"%d", val]];
+                
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * (x-1) + y] = occupiedSpot;
+                
+            }else{
+                
+                
+                
+            }
             
             [self moveTile:[target getAbove] x:x-1 y:y direction:@"up"];
             
