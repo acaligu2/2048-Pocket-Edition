@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AC2758ED22021C2400B4A942 /* TwentyFortyEightris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwentyFortyEightris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2758ED22021C2400B4A942 /* TwentyFortyEight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwentyFortyEight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2758F122021C2400B4A942 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AC2758F322021C2400B4A942 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AC2758F422021C2400B4A942 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		AC2758E422021C2300B4A942 = {
 			isa = PBXGroup;
 			children = (
-				AC2758EF22021C2400B4A942 /* TwentyFortyEightris */,
+				AC2758EF22021C2400B4A942 /* TwentyFortyEight */,
 				AC2758EE22021C2400B4A942 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,12 +53,12 @@
 		AC2758EE22021C2400B4A942 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC2758ED22021C2400B4A942 /* TwentyFortyEightris.app */,
+				AC2758ED22021C2400B4A942 /* TwentyFortyEight.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AC2758EF22021C2400B4A942 /* TwentyFortyEightris */ = {
+		AC2758EF22021C2400B4A942 /* TwentyFortyEight */ = {
 			isa = PBXGroup;
 			children = (
 				AC2758F322021C2400B4A942 /* AppDelegate.h */,
@@ -73,6 +73,7 @@
 				ACA0BCA22209DBCF0079C761 /* TileInformation.h */,
 				ACA0BCA32209DBCF0079C761 /* TileInformation.m */,
 			);
+			name = TwentyFortyEight;
 			path = TwentyFortyEightris;
 			sourceTree = "<group>";
 		};
@@ -87,9 +88,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AC2758EC22021C2300B4A942 /* TwentyFortyEightris */ = {
+		AC2758EC22021C2300B4A942 /* TwentyFortyEight */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC27590422021C2400B4A942 /* Build configuration list for PBXNativeTarget "TwentyFortyEightris" */;
+			buildConfigurationList = AC27590422021C2400B4A942 /* Build configuration list for PBXNativeTarget "TwentyFortyEight" */;
 			buildPhases = (
 				AC2758E922021C2300B4A942 /* Sources */,
 				AC2758EA22021C2300B4A942 /* Frameworks */,
@@ -99,9 +100,9 @@
 			);
 			dependencies = (
 			);
-			name = TwentyFortyEightris;
+			name = TwentyFortyEight;
 			productName = TwentyFortyEightris;
-			productReference = AC2758ED22021C2400B4A942 /* TwentyFortyEightris.app */;
+			productReference = AC2758ED22021C2400B4A942 /* TwentyFortyEight.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -119,7 +120,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AC2758E822021C2300B4A942 /* Build configuration list for PBXProject "TwentyFortyEightris" */;
+			buildConfigurationList = AC2758E822021C2300B4A942 /* Build configuration list for PBXProject "TwentyFortyEight" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -132,7 +133,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AC2758EC22021C2300B4A942 /* TwentyFortyEightris */,
+				AC2758EC22021C2300B4A942 /* TwentyFortyEight */,
 			);
 		};
 /* End PBXProject section */
@@ -281,7 +282,7 @@
 				INFOPLIST_FILE = TwentyFortyEightris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AnthonyCaligure.TwentyFortyEightris;
+				PRODUCT_BUNDLE_IDENTIFIER = AnthonyCaligure.TwentyFortyEight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -294,7 +295,7 @@
 				INFOPLIST_FILE = TwentyFortyEightris/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AnthonyCaligure.TwentyFortyEightris;
+				PRODUCT_BUNDLE_IDENTIFIER = AnthonyCaligure.TwentyFortyEight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -303,7 +304,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AC2758E822021C2300B4A942 /* Build configuration list for PBXProject "TwentyFortyEightris" */ = {
+		AC2758E822021C2300B4A942 /* Build configuration list for PBXProject "TwentyFortyEight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC27590222021C2400B4A942 /* Debug */,
@@ -312,7 +313,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC27590422021C2400B4A942 /* Build configuration list for PBXNativeTarget "TwentyFortyEightris" */ = {
+		AC27590422021C2400B4A942 /* Build configuration list for PBXNativeTarget "TwentyFortyEight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC27590522021C2400B4A942 /* Debug */,

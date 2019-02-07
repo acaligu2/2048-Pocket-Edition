@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AC2758EC22021C2300B4A942"
-               BuildableName = "TwentyFortyEightris.app"
-               BlueprintName = "TwentyFortyEightris"
-               ReferencedContainer = "container:TwentyFortyEightris.xcodeproj">
+               BuildableName = "TwentyFortyEight.app"
+               BlueprintName = "TwentyFortyEight"
+               ReferencedContainer = "container:TwentyFortyEight.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC2758EC22021C2300B4A942"
-            BuildableName = "TwentyFortyEightris.app"
-            BlueprintName = "TwentyFortyEightris"
-            ReferencedContainer = "container:TwentyFortyEightris.xcodeproj">
+            BuildableName = "TwentyFortyEight.app"
+            BlueprintName = "TwentyFortyEight"
+            ReferencedContainer = "container:TwentyFortyEight.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC2758EC22021C2300B4A942"
-            BuildableName = "TwentyFortyEightris.app"
-            BlueprintName = "TwentyFortyEightris"
-            ReferencedContainer = "container:TwentyFortyEightris.xcodeproj">
+            BuildableName = "TwentyFortyEight.app"
+            BlueprintName = "TwentyFortyEight"
+            ReferencedContainer = "container:TwentyFortyEight.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC2758EC22021C2300B4A942"
-            BuildableName = "TwentyFortyEightris.app"
-            BlueprintName = "TwentyFortyEightris"
-            ReferencedContainer = "container:TwentyFortyEightris.xcodeproj">
+            BuildableName = "TwentyFortyEight.app"
+            BlueprintName = "TwentyFortyEight"
+            ReferencedContainer = "container:TwentyFortyEight.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
