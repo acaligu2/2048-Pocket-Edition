@@ -215,8 +215,7 @@ NSNumber *occupiedSpot;
     int newX = -1;
     int newY = -1;
     NSString *nextDir = @"";
-    
-    //Done?
+
     if([dir isEqualToString:@"up"]){ nextStep = [target getAbove]; newX = x - 1; newY = y; nextDir = @"up"; }
     if([dir isEqualToString:@"down"]){ nextStep = [target getBelow]; newX = x + 1; newY = y; nextDir = @"down";}
     if([dir isEqualToString:@"left"]){ nextStep = [target getLeft]; newX = x; newY = y - 1; nextDir = @"left";}
@@ -226,6 +225,24 @@ NSNumber *occupiedSpot;
         
         int val;
         
+        if([nextStep getScore] != [target getScore]){
+            
+            if([nextStep getScore] == 0){
+                
+                val = [target getScore];
+                [target setTileScore:0];
+                [tileMatrix[x][y] setText:@""];
+                [nextStep setTileScore:val];
+                [tileMatrix[newX][newY] setText:[NSString stringWithFormat:@"%d", val]];
+                
+                occupied[4 * x + y] = freeSpot;
+                occupied[4 * newX + newY] = occupiedSpot;
+                
+            }
+            
+        }
+            
+            
         if([nextStep getScore] == [target getScore]){
             
             val = [target getScore] * 2;
@@ -240,21 +257,6 @@ NSNumber *occupiedSpot;
             
             occupied[4 * x + y] = freeSpot;
             occupied[4 * newX + newY] = occupiedSpot;
-            
-        }else{
-            
-            if ([nextStep getScore] == 0){
-                
-                val = [target getScore];
-                [target setTileScore:0];
-                [tileMatrix[x][y] setText:@""];
-                [nextStep setTileScore:val];
-                [tileMatrix[newX][newY] setText:[NSString stringWithFormat:@"%d", val]];
-                
-                occupied[4 * x + y] = freeSpot;
-                occupied[4 * newX + newY] = occupiedSpot;
-            
-            }
                 
         }
         
@@ -265,7 +267,6 @@ NSNumber *occupiedSpot;
         return;
         
     }
-
     
 }
 
