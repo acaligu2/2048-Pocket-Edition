@@ -13,7 +13,7 @@
 @end
 
 @implementation ViewController
-@synthesize gameTitle, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, upperMiddleTiles, topTiles, lowerMiddleTiles, bottomTiles, reset;
+@synthesize gameTitle, gameOver, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, upperMiddleTiles, topTiles, lowerMiddleTiles, bottomTiles, reset, pocket, pocketBackground;
 
 int gameScore = 0;
 
@@ -78,6 +78,9 @@ NSNumber *occupiedSpot;
     
     [tileBackground setBackgroundColor:backgroundColor];
     
+    [pocket setBackgroundColor: tileColor];
+    [pocketBackground setBackgroundColor:backgroundColor];
+    
     [reset setBackgroundColor:backgroundColor];
     
     self.view.backgroundColor = accentColor;
@@ -96,8 +99,21 @@ NSNumber *occupiedSpot;
     for(NSMutableArray *row in tileMatrix){
         
         for(UILabel *tile in row){
-            
+    
             [tile setBackgroundColor:tileColor];
+            
+        }
+        
+    }
+    
+    for(int i = 0; i < 4; i++){
+        
+        for(int j = 0; j < 4; j++){
+            
+            int val = (4 * i + j);
+            [tileMatrix[i][j] setTag:val];
+            
+            [tileMatrix[i][j] setText:[NSString stringWithFormat:@"%d %d", i, j]];
             
         }
         
@@ -124,6 +140,7 @@ NSNumber *occupiedSpot;
     }
     
     [scoreLabel setText:[NSString stringWithFormat:@"%d", 0]];
+    gameScore = 0;
     
     [self spawnNewTile];
     [self spawnNewTile];
@@ -183,6 +200,31 @@ NSNumber *occupiedSpot;
 }
 
 -(void)spawnNewTile{
+    
+    Boolean full = true;
+    
+    for(int i = 0; i < 16; i++){
+        
+        if(occupied[i] != occupiedSpot){
+         
+            full = false;
+            
+        }
+            
+    }
+    
+    //Game Over
+    if(full){
+        
+        [gameOver setText:@"GAME OVER"];
+        
+        sleep(5);
+        
+        [self resetGame:NULL];
+        
+        [gameOver setText:@""];
+        
+    }
     
     //Random coords for first tile
     NSInteger tileOneX = arc4random() % 4;
@@ -261,6 +303,8 @@ NSNumber *occupiedSpot;
             
             occupied[4 * x + y] = freeSpot;
             occupied[4 * newX + newY] = occupiedSpot;
+            
+            [self setScore:val];
                 
         }
         
@@ -391,6 +435,16 @@ NSNumber *occupiedSpot;
     [self spawnNewTile];
     
     [self updateColors];
+    
+}
+- (IBAction)moveToPocket:(id)sender {
+    
+    UIView *test = [sender view];
+    
+    UILabel *testL = (UILabel *)test;
+    
+    long x = [testL tag];
+    NSLog(@"%ld", x);
     
 }
 

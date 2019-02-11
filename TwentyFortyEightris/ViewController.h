@@ -16,6 +16,9 @@
 @property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *lowerMiddleTiles;
 @property (retain, nonatomic) IBOutletCollection(UILabel) NSMutableArray *bottomTiles;
 
+@property(nonatomic,strong) IBOutlet UILabel *pocket;
+@property (nonatomic, strong) IBOutlet UIView *pocketBackground;
+
 @property (nonatomic, strong) IBOutlet UIButton *reset;
 @property (nonatomic, strong) IBOutlet UILabel *gameTitle;
 @property (nonatomic, strong) IBOutlet UILabel *swipeTest;
@@ -23,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *scoreIndicator;
 @property (nonatomic, strong) IBOutlet UIView *tileBackground;
 @property (nonatomic, strong) IBOutlet UIView *scoreBackground;
+@property (nonatomic, strong) IBOutlet UILabel *gameOver;
 
 -(void)updateColors;
 -(void)setScore:(int)scoreAddition;
