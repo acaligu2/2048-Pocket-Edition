@@ -13,11 +13,15 @@
 @end
 
 @implementation ViewController
-@synthesize gameTitle, gameOver, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, upperMiddleTiles, topTiles, lowerMiddleTiles, bottomTiles, reset, pocket, pocketBackground;
+@synthesize gameTitle, gameOver, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, reset, pocket, pocketBackground, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15;
 
 int gameScore = 0;
 
 NSMutableArray* tileMatrix;
+NSMutableArray* topTiles;
+NSMutableArray* upperMiddleTiles;
+NSMutableArray* lowerMiddleTiles;
+NSMutableArray* bottomTiles;
 NSMutableArray* infoMatrix;
 NSMutableArray* occupied;
 NSNumber *freeSpot;
@@ -28,6 +32,32 @@ NSNumber *occupiedSpot;
     [super viewDidLoad];
     
     tileMatrix = [[NSMutableArray alloc]initWithCapacity:4];
+    
+    topTiles = [[NSMutableArray alloc]initWithCapacity:4];
+    upperMiddleTiles = [[NSMutableArray alloc]initWithCapacity:4];
+    lowerMiddleTiles = [[NSMutableArray alloc]initWithCapacity:4];
+    bottomTiles = [[NSMutableArray alloc]initWithCapacity:4];
+    
+    [topTiles addObject:t0];
+    [topTiles addObject:t1];
+    [topTiles addObject:t2];
+    [topTiles addObject:t3];
+    
+    [upperMiddleTiles addObject:t4];
+    [upperMiddleTiles addObject:t5];
+    [upperMiddleTiles addObject:t6];
+    [upperMiddleTiles addObject:t7];
+    
+    [lowerMiddleTiles addObject:t8];
+    [lowerMiddleTiles addObject:t9];
+    [lowerMiddleTiles addObject:t10];
+    [lowerMiddleTiles addObject:t11];
+    
+    [bottomTiles addObject:t12];
+    [bottomTiles addObject:t13];
+    [bottomTiles addObject:t14];
+    [bottomTiles addObject:t15];
+    
     occupied = [[NSMutableArray alloc]initWithCapacity:16];
     
     freeSpot = [NSNumber numberWithInteger:0];
@@ -43,6 +73,17 @@ NSNumber *occupiedSpot;
     [tileMatrix addObject:upperMiddleTiles];
     [tileMatrix addObject:lowerMiddleTiles];
     [tileMatrix addObject:bottomTiles];
+    
+    for(int i = 0; i < 4; i++){
+        
+        for(int j = 0; j < 4; j++){
+            
+            int val = (4 * i + j);
+            [tileMatrix[i][j] setTag:val];
+            
+        }
+        
+    }
     
     infoMatrix = [[NSMutableArray alloc] initWithCapacity:4];
     
@@ -110,8 +151,8 @@ NSNumber *occupiedSpot;
         
         for(int j = 0; j < 4; j++){
             
-            int val = (4 * i + j);
-            [tileMatrix[i][j] setTag:val];
+            //int val = (4 * i + j);
+            //[tileMatrix[i][j] setTag:val];
             
             [tileMatrix[i][j] setText:[NSString stringWithFormat:@"%d %d", i, j]];
             
