@@ -103,6 +103,8 @@ NSNumber *occupiedSpot;
         
     }
     
+    [self updateColors];
+    
     
 }
 - (IBAction)resetGame:(id)sender {
@@ -201,6 +203,8 @@ NSNumber *occupiedSpot;
     //Also reflect value in TileInformation class
     [infoMatrix[tileOneX][tileOneY] setTileScore:2];
     
+    [self updateColors];
+    
 }
 
 
@@ -270,6 +274,68 @@ NSNumber *occupiedSpot;
     
 }
 
+-(void)updateColors{
+    
+    for(int i = 0; i < 4; i++){
+        
+        for(int j = 0; j < 4; j++){
+            
+            int val = [infoMatrix[i][j] getScore];
+            UIColor *newTileColor;
+            
+            switch(val){
+                    
+                case 0:
+                    newTileColor = [[UIColor alloc]initWithRed:221.0/255.0 green: 221.0/255.0 blue: 221.0/255.0 alpha: 1.0];
+                    break;
+                case 2:
+                    newTileColor = [[UIColor alloc]initWithRed: 229.0/255.0 green: 210.0/255.0 blue: 227.0/255.0 alpha: 1.0];
+                    break;
+                case 4:
+                    newTileColor = [[UIColor alloc]initWithRed: 226.0/255.0 green: 201.0/255.0 blue: 224.0/255.0 alpha: 1.0];
+                    break;
+                case 8:
+                    newTileColor = [[UIColor alloc]initWithRed: 236.0/255.0 green: 190.0/255.0 blue: 222.0/255.0 alpha: 1.0];
+                    break;
+                case 16:
+                    newTileColor = [[UIColor alloc]initWithRed: 216.0/255.0 green: 171.0/255.0 blue: 203.0/255.0 alpha: 1.0];
+                    break;
+                case 32:
+                    newTileColor = [[UIColor alloc]initWithRed: 171.0/255.0 green: 136.0/255.0 blue: 180.0/255.0 alpha: 1.0];
+                    break;
+                case 64:
+                    newTileColor = [[UIColor alloc]initWithRed: 147.0/255.0 green: 115.0/255.0 blue: 155.0/255.0 alpha: 1.0];
+                    break;
+                case 128:
+                    newTileColor = [[UIColor alloc]initWithRed: 108.0/255.0 green: 82.0/255.0 blue: 159.0/255.0 alpha: 1.0];
+                    break;
+                case 256:
+                    newTileColor = [[UIColor alloc]initWithRed: 79.0/255.0 green: 57.0/255.0 blue: 124.0/255.0 alpha: 1.0];
+                    break;
+                case 512:
+                    newTileColor = [[UIColor alloc]initWithRed: 39.0/255.0 green: 41.0/255.0 blue: 133.0/255.0 alpha: 1.0];
+                    break;
+                case 1024:
+                    newTileColor = [[UIColor alloc]initWithRed: 23.0/255.0 green: 25.0/255.0 blue: 91.0/255.0 alpha: 1.0];
+                    break;
+                case 2048:
+                    newTileColor = [[UIColor alloc]initWithRed: 14.0/255.0 green: 15.0/255.0 blue: 76.0/255.0 alpha: 1.0];
+                    break;
+                default:
+                    newTileColor = [[UIColor alloc]initWithRed: 5.0/255.0 green: 6.0/255.0 blue: 48.0/255.0 alpha: 1.0];
+                    break;
+                    
+                    
+            }
+            
+            [tileMatrix[i][j] setBackgroundColor:newTileColor];
+            
+        }
+        
+    }
+    
+}
+
 //Sends command to manipulate tiles
 - (IBAction)swipeTest:(id)sender {
     
@@ -323,6 +389,8 @@ NSNumber *occupiedSpot;
     }
     
     [self spawnNewTile];
+    
+    [self updateColors];
     
 }
 

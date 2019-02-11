@@ -24,6 +24,7 @@
 @property (nonatomic, strong) IBOutlet UIView *tileBackground;
 @property (nonatomic, strong) IBOutlet UIView *scoreBackground;
 
+-(void)updateColors;
 -(void)setScore:(int)scoreAddition;
 -(void)moveTile:(TileInformation*)target x:(int)x y:(int)y direction:(NSString*)dir;
 -(void)spawnNewTile;
