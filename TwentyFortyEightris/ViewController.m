@@ -18,19 +18,21 @@
 int gameScore = 0;
 int pocketVal = 0;
 
-NSMutableArray* tileMatrix;
+NSMutableArray* tileMatrix;         //Matrix of UILabels
 NSMutableArray* topTiles;
 NSMutableArray* upperMiddleTiles;
 NSMutableArray* lowerMiddleTiles;
 NSMutableArray* bottomTiles;
-NSMutableArray* infoMatrix;
+NSMutableArray* infoMatrix;         //Matrix of TileInformation objects
 NSMutableArray* occupied;
-NSNumber *freeSpot;
-NSNumber *occupiedSpot;
+NSNumber *freeSpot;                 //Marks a free space on the board
+NSNumber *occupiedSpot;             //Marks an occupied space on the board
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    //Initialize all arrays and put into matrix
     
     tileMatrix = [[NSMutableArray alloc]initWithCapacity:4];
     
@@ -75,6 +77,8 @@ NSNumber *occupiedSpot;
     [tileMatrix addObject:lowerMiddleTiles];
     [tileMatrix addObject:bottomTiles];
     
+    //Associate tag with each label, used for pocket tap recognition
+    
     for(int i = 0; i < 4; i++){
         
         for(int j = 0; j < 4; j++){
@@ -104,6 +108,8 @@ NSNumber *occupiedSpot;
         [infoMatrix addObject:row];
         
     }
+    
+    //Initialize the neighbors for each tile
     
     [self establishNeighbors:infoMatrix];
     
@@ -152,9 +158,9 @@ NSNumber *occupiedSpot;
     
     
 }
+
+//Reset all tiles and start score from 0
 - (IBAction)resetGame:(id)sender {
- 
-    [gameTitle setText:@"Twenty-Forty-Eight"];
     
     for(int i = 0; i < 4; i++){
         
@@ -179,8 +185,6 @@ NSNumber *occupiedSpot;
     [self spawnNewTile];
     
 }
-
-//[self setScore:10];
 
 //Creates neighbor relations for all tiles
 -(void)establishNeighbors:(NSMutableArray*)infoMat{
@@ -232,6 +236,7 @@ NSNumber *occupiedSpot;
     
 }
 
+//Spawns a new tile in an empty space & marks the end of the game if no tiles are available
 -(void)spawnNewTile{
     
     Boolean full = true;
@@ -282,6 +287,7 @@ NSNumber *occupiedSpot;
     // Dispose of any resources that can be recreated.
 }
 
+//Function to handle the sliding of tiles
 -(void)moveTile:(TileInformation *)target x:(int)x y:(int)y direction:(NSString*)dir{
     
     TileInformation *nextStep;
@@ -289,17 +295,21 @@ NSNumber *occupiedSpot;
     int newY = -1;
     NSString *nextDir = @"";
 
+    //Determine which neighbor will be moved next
     if([dir isEqualToString:@"up"]){ nextStep = [target getAbove]; newX = x - 1; newY = y; nextDir = @"up"; }
     if([dir isEqualToString:@"down"]){ nextStep = [target getBelow]; newX = x + 1; newY = y; nextDir = @"down";}
     if([dir isEqualToString:@"left"]){ nextStep = [target getLeft]; newX = x; newY = y - 1; nextDir = @"left";}
     if([dir isEqualToString:@"right"]){ nextStep = [target getRight]; newX = x; newY = y + 1; nextDir = @"right";}
     
+    //We have space to move
     if(nextStep != nil){
         
         int val;
         
+        //No merging required
         if([nextStep getScore] != [target getScore]){
             
+            //Simply moving to an empty tile
             if([nextStep getScore] == 0){
                 
                 val = [target getScore];
@@ -315,7 +325,7 @@ NSNumber *occupiedSpot;
             
         }
             
-            
+        //Merging two identical tiles
         if([nextStep getScore] == [target getScore]){
             
             val = [target getScore] * 2;
@@ -335,6 +345,7 @@ NSNumber *occupiedSpot;
                 
         }
         
+        //Recursively call with the neighbor to check if we can move further
         [self moveTile:nextStep x:newX y:newY direction:nextDir];
         
     }else{
@@ -345,6 +356,7 @@ NSNumber *occupiedSpot;
     
 }
 
+//Changes the color of the tiles based on the values
 -(void)updateColors{
     
     for(int i = 0; i < 4; i++){
@@ -405,6 +417,7 @@ NSNumber *occupiedSpot;
         
     }
     
+    //Changes the pocket color
     UIColor *newTileColor;
     
     switch(pocketVal){
@@ -513,6 +526,8 @@ NSNumber *occupiedSpot;
     [self updateColors];
     
 }
+
+//Handles functionality of the pocket
 - (IBAction)moveToPocket:(id)sender {
     
     int xCoord = -1;
@@ -524,6 +539,7 @@ NSNumber *occupiedSpot;
     
     long labelID = [testL tag];
     
+    //Determine which tile to move from/to
     switch(labelID){
             
         case 0:
@@ -604,8 +620,10 @@ NSNumber *occupiedSpot;
     
     }
     
+    //Tile selected is populated
     if([infoMatrix[xCoord][yCoord] getScore] != 0){
         
+        //Move the value to the pocket
         if([[pocket text] isEqualToString: @""]){
             
             pocketVal = [infoMatrix[xCoord][yCoord] getScore];
@@ -616,6 +634,7 @@ NSNumber *occupiedSpot;
             
             occupied[4*xCoord + yCoord] = freeSpot;
             
+        //Merge the value with the value in the pocket
         }else if(pocketVal == [infoMatrix[xCoord][yCoord] getScore]){
             
             int newVal = [infoMatrix[xCoord][yCoord] getScore] * 2;
@@ -629,8 +648,10 @@ NSNumber *occupiedSpot;
             
         }
         
+    //Tile is empty
     }else{
         
+        //Pocket is full, moving value to the tile selected
         if(![[pocket text] isEqualToString:@""]){
             
             NSString* newVal = [pocket text];
