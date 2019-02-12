@@ -16,6 +16,7 @@
 @synthesize gameTitle, gameOver, swipeTest, scoreLabel, scoreIndicator, tileBackground, scoreBackground, reset, pocket, pocketBackground, t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15;
 
 int gameScore = 0;
+int pocketVal = 0;
 
 NSMutableArray* tileMatrix;
 NSMutableArray* topTiles;
@@ -147,24 +148,13 @@ NSNumber *occupiedSpot;
         
     }
     
-    for(int i = 0; i < 4; i++){
-        
-        for(int j = 0; j < 4; j++){
-            
-            //int val = (4 * i + j);
-            //[tileMatrix[i][j] setTag:val];
-            
-            [tileMatrix[i][j] setText:[NSString stringWithFormat:@"%d %d", i, j]];
-            
-        }
-        
-    }
-    
     [self updateColors];
     
     
 }
 - (IBAction)resetGame:(id)sender {
+ 
+    [gameTitle setText:@"Twenty-Forty-Eight"];
     
     for(int i = 0; i < 4; i++){
         
@@ -182,6 +172,8 @@ NSNumber *occupiedSpot;
     
     [scoreLabel setText:[NSString stringWithFormat:@"%d", 0]];
     gameScore = 0;
+    pocketVal = 0;
+    [pocket setText:@""];
     
     [self spawnNewTile];
     [self spawnNewTile];
@@ -257,13 +249,7 @@ NSNumber *occupiedSpot;
     //Game Over
     if(full){
         
-        [gameOver setText:@"GAME OVER"];
-        
-        sleep(5);
-        
         [self resetGame:NULL];
-        
-        [gameOver setText:@""];
         
     }
     
@@ -419,6 +405,55 @@ NSNumber *occupiedSpot;
         
     }
     
+    UIColor *newTileColor;
+    
+    switch(pocketVal){
+            
+        case 0:
+            newTileColor = [[UIColor alloc]initWithRed:221.0/255.0 green: 221.0/255.0 blue: 221.0/255.0 alpha: 1.0];
+            break;
+        case 2:
+            newTileColor = [[UIColor alloc]initWithRed: 229.0/255.0 green: 210.0/255.0 blue: 227.0/255.0 alpha: 1.0];
+            break;
+        case 4:
+            newTileColor = [[UIColor alloc]initWithRed: 226.0/255.0 green: 201.0/255.0 blue: 224.0/255.0 alpha: 1.0];
+            break;
+        case 8:
+            newTileColor = [[UIColor alloc]initWithRed: 236.0/255.0 green: 190.0/255.0 blue: 222.0/255.0 alpha: 1.0];
+            break;
+        case 16:
+            newTileColor = [[UIColor alloc]initWithRed: 216.0/255.0 green: 171.0/255.0 blue: 203.0/255.0 alpha: 1.0];
+            break;
+        case 32:
+            newTileColor = [[UIColor alloc]initWithRed: 171.0/255.0 green: 136.0/255.0 blue: 180.0/255.0 alpha: 1.0];
+            break;
+        case 64:
+            newTileColor = [[UIColor alloc]initWithRed: 147.0/255.0 green: 115.0/255.0 blue: 155.0/255.0 alpha: 1.0];
+            break;
+        case 128:
+            newTileColor = [[UIColor alloc]initWithRed: 108.0/255.0 green: 82.0/255.0 blue: 159.0/255.0 alpha: 1.0];
+            break;
+        case 256:
+            newTileColor = [[UIColor alloc]initWithRed: 79.0/255.0 green: 57.0/255.0 blue: 124.0/255.0 alpha: 1.0];
+            break;
+        case 512:
+            newTileColor = [[UIColor alloc]initWithRed: 39.0/255.0 green: 41.0/255.0 blue: 133.0/255.0 alpha: 1.0];
+            break;
+        case 1024:
+            newTileColor = [[UIColor alloc]initWithRed: 23.0/255.0 green: 25.0/255.0 blue: 91.0/255.0 alpha: 1.0];
+            break;
+        case 2048:
+            newTileColor = [[UIColor alloc]initWithRed: 14.0/255.0 green: 15.0/255.0 blue: 76.0/255.0 alpha: 1.0];
+            break;
+        default:
+            newTileColor = [[UIColor alloc]initWithRed: 5.0/255.0 green: 6.0/255.0 blue: 48.0/255.0 alpha: 1.0];
+            break;
+            
+            
+    }
+    
+    [pocket setBackgroundColor:newTileColor];
+    
 }
 
 //Sends command to manipulate tiles
@@ -480,12 +515,138 @@ NSNumber *occupiedSpot;
 }
 - (IBAction)moveToPocket:(id)sender {
     
+    int xCoord = -1;
+    int yCoord = -1;
+    
     UIView *test = [sender view];
     
     UILabel *testL = (UILabel *)test;
     
-    long x = [testL tag];
-    NSLog(@"%ld", x);
+    long labelID = [testL tag];
+    
+    switch(labelID){
+            
+        case 0:
+            xCoord = 0;
+            yCoord = 0;
+            break;
+        case 1:
+            xCoord = 0;
+            yCoord = 1;
+            break;
+        case 2:
+            xCoord = 0;
+            yCoord = 2;
+            break;
+        case 3:
+            xCoord = 0;
+            yCoord = 3;
+            break;
+        case 4:
+            xCoord = 1;
+            yCoord = 0;
+            break;
+        case 5:
+            xCoord = 1;
+            yCoord = 1;
+            break;
+        case 6:
+            xCoord = 1;
+            yCoord = 2;
+            break;
+
+        case 7:
+            xCoord = 1;
+            yCoord = 3;
+            break;
+
+        case 8:
+            xCoord = 2;
+            yCoord = 0;
+            break;
+
+        case 9:
+            xCoord = 2;
+            yCoord = 1;
+            break;
+
+        case 10:
+            xCoord = 2;
+            yCoord = 2;
+            break;
+
+        case 11:
+            xCoord = 2;
+            yCoord = 3;
+            break;
+
+        case 12:
+            xCoord = 3;
+            yCoord = 0;
+            break;
+            
+        case 13:
+            xCoord = 3;
+            yCoord = 1;
+            break;
+
+        case 14:
+            xCoord = 3;
+            yCoord = 2;
+            break;
+
+        case 15:
+            xCoord = 3;
+            yCoord = 3;
+            break;
+        default:
+            break;
+    
+    }
+    
+    if([infoMatrix[xCoord][yCoord] getScore] != 0){
+        
+        if([[pocket text] isEqualToString: @""]){
+            
+            pocketVal = [infoMatrix[xCoord][yCoord] getScore];
+            
+            [pocket setText:[NSString stringWithFormat:@"%d", [infoMatrix[xCoord][yCoord] getScore]]];
+            [infoMatrix[xCoord][yCoord] setTileScore:0];
+            [tileMatrix[xCoord][yCoord] setText:@""];
+            
+            occupied[4*xCoord + yCoord] = freeSpot;
+            
+        }else if(pocketVal == [infoMatrix[xCoord][yCoord] getScore]){
+            
+            int newVal = [infoMatrix[xCoord][yCoord] getScore] * 2;
+            
+            [pocket setText:@""];
+            [infoMatrix[xCoord][yCoord] setTileScore:newVal];
+            [tileMatrix[xCoord][yCoord] setText:[NSString stringWithFormat:@"%d", newVal]];
+
+            
+            pocketVal = 0;
+            
+        }
+        
+    }else{
+        
+        if(![[pocket text] isEqualToString:@""]){
+            
+            NSString* newVal = [pocket text];
+            
+            [pocket setText:@""];
+            [infoMatrix[xCoord][yCoord] setTileScore: pocketVal];
+            [tileMatrix[xCoord][yCoord] setText:newVal];
+            
+            occupied[4*xCoord + yCoord] = occupiedSpot;
+            pocketVal = 0;
+            
+        }
+        
+    }
+    
+    [self updateColors];
     
 }
 
